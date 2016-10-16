@@ -2,6 +2,7 @@ package eu.jakubtudruj.firstapp.Entities;
 
 import android.util.Log;
 import eu.jakubtudruj.firstapp.Entities.SubjectMark;
+import java.util.ArrayList;
 /**
  * Created by kuba on 16/10/2016.
  */
@@ -9,8 +10,7 @@ import eu.jakubtudruj.firstapp.Entities.SubjectMark;
 public class Student extends Human {
     private static final int MAX_COUNTER = 20;
     public String indexNumber;
-//    public String[][] subjectMarks = new String[MAX_COUNTER][2];
-    public SubjectMark[] subjectMarks = new SubjectMark[MAX_COUNTER];
+    public ArrayList<SubjectMark> subjectMarks = new ArrayList<SubjectMark>();
     private int counter;
 
     public Student(String name, String surname, int age, String indexNumber) {
@@ -21,32 +21,21 @@ public class Student extends Human {
     }
 
     public void addMark(String subject, double mark) {
-//        if (this.counter <= MAX_COUNTER) {
-//            this.subjectMarks[this.counter][0] = subject;
-//            this.subjectMarks[this.counter][1] = String.valueOf(mark);
-//            this.counter ++;
-//            Log.i("Added subject: " + subject + " and mark: " + mark " at index: " this.counter);
-//        } else {
-//            Log.e("Maximum counter " + String.valueOf(MAX_COUNTER) + "reached!")
-//        }
-        try {
-//            this.subjectMarks[this.counter][0] = subject;
-//            this.subjectMarks[this.counter][1] = String.valueOf(mark);
-            this.subjectMarks[this.counter] = new SubjectMark(subject, mark);
-            this.counter ++;
-//            Log.i("Added subject: " + subject + " and mark: " + mark + " at index: " + this.counter);
-        } catch (Exception e) {
-//            Log.e("Maximum counter " + String.valueOf(MAX_COUNTER) + "reached!")
-            e.printStackTrace();
-        }
-
+        this.subjectMarks.add(new SubjectMark(subject, mark));
     }
 
-    public void printMarks() {
+    public String printMarks() {
         String marks = "";
-        for (int i=0; i < this.subjectMarks.length; i++) {
-            marks += "Subject: \t" + this.subjectMarks[i].getSubject() + " mark: " + String.valueOf(this.subjectMarks[i].getMark()) + "\n";
+
+
+        for (int i=0; i < this.subjectMarks.size(); i++) {
+            String tab = "\t\t";
+            if (i%2 != 0) {
+                tab = "";
+            }
+            marks += this.subjectMarks.get(i).getSubject() + ": " + tab + String.valueOf(this.subjectMarks.get(i).getMark()) + "\n";
         }
+        return marks;
     }
 
 }

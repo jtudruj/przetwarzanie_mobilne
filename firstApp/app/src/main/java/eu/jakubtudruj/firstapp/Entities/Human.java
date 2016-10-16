@@ -15,6 +15,10 @@ public class Human {
         this.age = age;
     }
 
+    public String whatIsYourName() {
+        return this.name + " " + this.surname;
+    }
+
 //setters & getters
     public String getName() {
         return name;

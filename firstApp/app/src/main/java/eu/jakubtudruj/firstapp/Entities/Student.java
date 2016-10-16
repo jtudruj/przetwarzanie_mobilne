@@ -1,7 +1,7 @@
 package eu.jakubtudruj.firstapp.Entities;
 
 import android.util.Log;
-
+import eu.jakubtudruj.firstapp.Entities.SubjectMark;
 /**
  * Created by kuba on 16/10/2016.
  */
@@ -9,7 +9,8 @@ import android.util.Log;
 public class Student extends Human {
     private static final int MAX_COUNTER = 20;
     public String indexNumber;
-    public String[][] subjectMarks = new String[MAX_COUNTER][2];
+//    public String[][] subjectMarks = new String[MAX_COUNTER][2];
+    public SubjectMark[] subjectMarks = new SubjectMark[MAX_COUNTER];
     private int counter;
 
     public Student(String name, String surname, int age, String indexNumber) {
@@ -19,7 +20,7 @@ public class Student extends Human {
         this.counter = 0;
     }
 
-    public addMark(String subject, double mark) {
+    public void addMark(String subject, double mark) {
 //        if (this.counter <= MAX_COUNTER) {
 //            this.subjectMarks[this.counter][0] = subject;
 //            this.subjectMarks[this.counter][1] = String.valueOf(mark);
@@ -29,23 +30,22 @@ public class Student extends Human {
 //            Log.e("Maximum counter " + String.valueOf(MAX_COUNTER) + "reached!")
 //        }
         try {
-            this.subjectMarks[this.counter][0] = subject;
-            this.subjectMarks[this.counter][1] = String.valueOf(mark);
+//            this.subjectMarks[this.counter][0] = subject;
+//            this.subjectMarks[this.counter][1] = String.valueOf(mark);
+            this.subjectMarks[this.counter] = new SubjectMark(subject, mark);
             this.counter ++;
-            Log.i("Added subject: " + subject + " and mark: " + mark " at index: " this.counter);
+//            Log.i("Added subject: " + subject + " and mark: " + mark + " at index: " + this.counter);
         } catch (Exception e) {
-            Log.e("Maximum counter " + String.valueOf(MAX_COUNTER) + "reached!")
+//            Log.e("Maximum counter " + String.valueOf(MAX_COUNTER) + "reached!")
             e.printStackTrace();
         }
 
     }
 
-    public printMarks() {
+    public void printMarks() {
         String marks = "";
         for (int i=0; i < this.subjectMarks.length; i++) {
-            for (int j=0; j < this.subjectMarks[0].length; j++) {
-                marks += String
-            }
+            marks += "Subject: \t" + this.subjectMarks[i].getSubject() + " mark: " + String.valueOf(this.subjectMarks[i].getMark()) + "\n";
         }
     }
 

@@ -14,7 +14,6 @@ import eu.jakubtudruj.firstapp.Entities.Student;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Student student;
     private TextView studentDetailTextView;
 
     @Override
@@ -33,9 +32,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        this.setupStudent();
-        this.setupStudentMarks();
-        this.printAllStudentsInformations();
+        this.setupLayoutElements();
+
+        Student student1 = new Student("Jan", "Kowalski", 25, "ABC123456");
+        Student student2 = new Student("Halina", "Nowak", 20, "ABC98765");
+
+        this.setupStudentMarks(student1);
+        this.printAllStudentsInformations(student1);
+
+        this.setupStudentMarks(student2);
+        this.printAllStudentsInformations(student2);
     }
 
     @Override
@@ -60,20 +66,20 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupStudent() {
-        this.student = new Student("Jan", "Kowalski", 25, "ABC123456");
+    private void setupStudentMarks(Student student) {
+        student.addMark("Projektowanie systemów komputerowych", 5);
+        student.addMark("Programowanie JAVA", 4);
+        student.addMark("Projektowanie C++", 3);
+        student.addMark("Projektowanie Perl", 2);
+    }
+
+    private void printAllStudentsInformations(Student student) {
+        this.studentDetailTextView.append(student.whatIsYourName() + "\n\n");
+        this.studentDetailTextView.append(student.printMarks() + "\n\n");
+    }
+
+    private void setupLayoutElements() {
         this.studentDetailTextView= (TextView)findViewById(R.id.studentDesc);
-        this.studentDetailTextView.setText(this.student.whatIsYourName() + "\n\n");
-    }
-
-    private void setupStudentMarks() {
-        this.student.addMark("Projektowanie systemów komputerowych", 5);
-        this.student.addMark("Programowanie JAVA", 4);
-        this.student.addMark("Projektowanie C++", 3);
-        this.student.addMark("Projektowanie Perl", 2);
-    }
-
-    private void printAllStudentsInformations() {
-        this.studentDetailTextView.append(this.student.printMarks());
+        this.studentDetailTextView.setText("");
     }
 }

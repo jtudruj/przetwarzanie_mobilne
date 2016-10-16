@@ -75,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void printAllStudentsInformations(Student student) {
         this.studentDetailTextView.append(student.whatIsYourName() + "\n\n");
-        this.studentDetailTextView.append(student.printMarks() + "\n\n");
+        this.studentDetailTextView.append(student.printMarks() + "\n");
+        this.studentDetailTextView.append("Averrage: " + student.calculateverrage() + "\n\n");
     }
 
     private void setupLayoutElements() {

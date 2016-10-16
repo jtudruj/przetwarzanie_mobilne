@@ -24,6 +24,14 @@ public class Student extends Human {
         this.subjectMarks.add(new SubjectMark(subject, mark));
     }
 
+    public double calculateverrage() {
+        double sum = 0;
+        for (SubjectMark sm: subjectMarks) {
+            sum += sm.getMark();
+        }
+        return sum / subjectMarks.size();
+    }
+
     public String printMarks() {
         String marks = "";
 

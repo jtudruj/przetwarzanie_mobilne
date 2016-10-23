@@ -25,11 +25,10 @@ public class MainActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
 
         if (login.equals("secret") && password.equals("passwd")) {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
         } else {
             Toast.makeText(this, "Invalid login or password", Toast.LENGTH_SHORT).show();
         }
 
-//        startActivity(intent);
     }
 }

@@ -9,6 +9,12 @@ public class ListItemEntity {
     String date;
     String temperature;
 
+    public ListItemEntity(String place, String date, String temperature) {
+        this.place = place;
+        this.date = date;
+        this.temperature = temperature;
+    }
+
     public String getPlace() {
         return place;
     }

@@ -2,6 +2,7 @@ package eu.jakubtudruj.secondapp;
 
 import android.app.DatePickerDialog;
 import android.app.LauncherActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -86,6 +88,17 @@ public class FormActivity extends AppCompatActivity {
         Cursor cursor = this.dbHelper.getTemperatures();
         this.adapter = new TempListCurAdapter(this, cursor, true);
         this.listView.setAdapter(this.adapter);
+
+        this.listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+//                Intent intent = new Intent(MainActivity.this, SendMessage.class);
+//                String message = "abc";
+//                intent.putExtra(EXTRA_MESSAGE, message);
+//                startActivity(intent);
+            }
+        });
 
     }
 }

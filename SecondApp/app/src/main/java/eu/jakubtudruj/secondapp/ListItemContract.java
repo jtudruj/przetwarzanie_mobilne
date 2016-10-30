@@ -16,7 +16,7 @@ public final class ListItemContract {
     public static final String DOUBLE_TYPE = " REAL";
     public static final String COMMA_SEP = ",";
 
-    public static abstract class Temp_history implements BaseColumns {
+    public static abstract class TempHistory implements BaseColumns {
         public static final String TABLE_NAME = "temperatures";
         public static final String COLUMN_NAME_PLACE = "place";
         public static final String COLUMN_NAME_DATE = "date";

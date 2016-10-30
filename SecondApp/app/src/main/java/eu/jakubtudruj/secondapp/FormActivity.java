@@ -2,6 +2,7 @@ package eu.jakubtudruj.secondapp;
 
 import android.app.DatePickerDialog;
 import android.app.LauncherActivity;
+import android.database.Cursor;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +26,9 @@ public class FormActivity extends AppCompatActivity {
 
     ListView listView;
     ArrayList<ListItemEntity> items;
-    MyAdapter adapter;
+    TempListCurAdapter adapter;
+
+    TempDbHelper dbHelper;
 
     int year, month, day;
 
@@ -33,6 +36,8 @@ public class FormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+
+        dbHelper = new TempDbHelper(this.getApplicationContext());
 
         this.setupListView();
     }
@@ -65,15 +70,21 @@ public class FormActivity extends AppCompatActivity {
         EditText temperatureEditText= (EditText) findViewById(R.id.temperatureEditText);
 
         ListItemEntity item = new ListItemEntity(placeEditText.getText().toString(), dateEditText.getText().toString(), temperatureEditText.getText().toString());
-        this.items.add(item);
+
+        this.dbHelper.insertTemp(item);
+
         this.adapter.notifyDataSetChanged();
+
+        //refresh adapter data
+        this.adapter.swapCursor(this.dbHelper.getTemperatures());
     }
 
     private void setupListView() {
         this.listView = (ListView) findViewById(R.id.listView);
         this.items = new ArrayList<ListItemEntity>();
 
-        this.adapter = new MyAdapter(this, this.items);
+        Cursor cursor = this.dbHelper.getTemperatures();
+        this.adapter = new TempListCurAdapter(this, cursor, true);
         this.listView.setAdapter(this.adapter);
 
     }

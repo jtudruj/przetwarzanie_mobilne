@@ -52,4 +52,6 @@ public class MyAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+
 }
